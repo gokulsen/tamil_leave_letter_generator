@@ -5,26 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ஈட்டிய விடுப்பு கடிதம் – Generator</title>
 <style>
-  :root { --ink:#172033; --blue:#174a7e; --line:#d9e1ea; --muted:#5e6b7b; }
+  :root { --ink:#13244b; --navy:#0b1d49; --teal:#079db4; --line:#dce6ee; --muted:#64748b; --canvas:#f3f7fb; }
   * { box-sizing:border-box; }
-  body { margin:0; font-family: "Noto Sans Tamil","Latha","Vijaya",sans-serif; color:var(--ink); background:#f3f6fa; }
-  .wrap { max-width:1100px; margin:28px auto; padding:0 18px; }
-  h1 { font-size:25px; margin:0 0 6px; color:#163b63; }
-  .intro { color:var(--muted); margin:0 0 22px; line-height:1.6; }
-  .layout { display:grid; grid-template-columns: minmax(280px,390px) 1fr; gap:20px; align-items:start; }
-  .panel { background:white; border:1px solid var(--line); border-radius:14px; padding:20px; box-shadow:0 4px 18px #1720330a; }
-  .panel h2 { font-size:18px; margin:0 0 16px; }
-  label { display:block; font-size:13px; font-weight:700; margin:13px 0 6px; color:#34445a; }
-  input, select { width:100%; padding:10px 11px; border:1px solid #cbd5e1; border-radius:8px; font:inherit; font-size:14px; background:white; color:#172033; }
-  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-  .count { background:#edf4fb; border-radius:8px; padding:10px 12px; margin-top:12px; font-size:14px; }
+  body { margin:0; font-family:"Noto Sans Tamil","Latha","Vijaya",sans-serif; color:var(--ink); background:var(--canvas); }
+  .wrap { max-width:1280px; margin:32px auto; padding:0 22px; }
+  .brand-header { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(280px,.7fr); gap:30px; align-items:center; padding:20px 28px; background:white; border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 34px #0b1d490d; }
+  .brand-logo { display:block; width:100%; max-width:650px; height:auto; }
+  .brand-copy { border-left:2px solid #12a8bc; padding:8px 0 8px 28px; }
+  h1 { font-size:27px; line-height:1.45; margin:0 0 8px; color:var(--navy); }
+  .intro { color:var(--muted); margin:0; line-height:1.8; }
+  .layout { display:grid; grid-template-columns:minmax(300px,380px) minmax(0,1fr); gap:22px; align-items:start; margin-top:24px; }
+  .panel { background:white; border:1px solid var(--line); border-top:3px solid var(--teal); border-radius:18px; padding:24px; box-shadow:0 12px 30px #0b1d490b; }
+  .panel h2 { font-size:18px; margin:0 0 18px; color:var(--navy); }
+  label { display:block; font-size:13px; font-weight:700; margin:14px 0 7px; color:#334563; }
+  input, select { width:100%; padding:11px 12px; border:1px solid #cbd8e4; border-radius:10px; font:inherit; font-size:14px; background:white; color:var(--ink); transition:border-color .15s,box-shadow .15s; }
+  input:focus, select:focus { outline:none; border-color:var(--teal); box-shadow:0 0 0 3px #079db41c; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .count { background:#e9f7f9; border:1px solid #c7e9ed; border-left:4px solid var(--teal); border-radius:10px; padding:11px 13px; margin-top:14px; font-size:14px; color:var(--navy); font-weight:700; }
   .hint { font-size:12px; color:var(--muted); line-height:1.5; margin-top:6px; }
-  .actions { display:flex; flex-wrap:wrap; gap:9px; margin-top:18px; }
-  button { border:0; border-radius:8px; padding:11px 15px; font-weight:700; cursor:pointer; font-size:14px; }
-  .primary { background:var(--blue); color:white; }
-  .secondary { background:#e9eef5; color:#24364d; }
-  .preview { background:#e9eef5; border-radius:10px; padding:16px; overflow:auto; }
-  .paper { background:white; width:100%; max-width:720px; min-height:850px; margin:0 auto 16px; padding:54px 62px; box-shadow:0 2px 12px #17203314; color:#111; font-family:"Noto Serif Tamil","Latha","Vijaya",serif; font-size:16px; line-height:1.85; }
+  .actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+  button { border:0; border-radius:10px; padding:12px 16px; font-weight:700; cursor:pointer; font-size:14px; transition:transform .15s,background-color .15s,box-shadow .15s; }
+  button:hover { transform:translateY(-1px); }
+  button:focus-visible { outline:3px solid #079db455; outline-offset:2px; }
+  .primary { background:var(--navy); color:white; box-shadow:0 5px 14px #0b1d4926; }
+  .primary:hover { background:#17346d; }
+  .secondary { background:#eaf1f6; color:var(--navy); }
+  .secondary:hover { background:#dce8f0; }
+  .preview { background:#eaf1f6; border:1px solid #dce6ee; border-radius:18px; padding:22px; overflow:auto; }
+  .preview-heading { margin:0 auto 16px; max-width:760px; color:var(--navy); font-size:17px; font-weight:700; }
+  .paper { background:white; width:100%; max-width:760px; min-height:850px; margin:0 auto 20px; padding:54px 62px; border:1px solid #e1e8ef; border-radius:5px; box-shadow:0 8px 24px #0b1d4912; color:#111; font-family:"Noto Serif Tamil","Latha","Vijaya",serif; font-size:16px; line-height:1.85; }
   .paper h3 { text-align:center; font-size:20px; margin:0 0 25px; font-weight:700; }
   .paper .section { margin:12px 0 18px; }
   .paper .body { margin-top:24px; text-align:justify; text-indent:28px; }
@@ -33,24 +42,29 @@
   .paper .signature { text-align:right; margin-top:28px; }
   .paper .attachment { margin-top:26px; font-size:14px; }
   .schoolline { white-space:normal; }
-  .smallnote { font-size:12px; color:var(--muted); margin-top:10px; }
+  .smallnote { font-size:12px; color:var(--muted); margin-top:12px; line-height:1.7; }
+  @media(max-width:900px) { .brand-header { grid-template-columns:1fr; gap:12px; } .brand-logo { max-width:580px; margin:auto; } .brand-copy { border-left:0; border-top:2px solid #12a8bc; padding:14px 0 0; } }
   @media(max-width:800px) { .layout { grid-template-columns:1fr; } .paper { padding:35px 25px; min-height:760px; } }
+  @media(max-width:520px) { .wrap { margin:16px auto; padding:0 12px; } .brand-header { padding:16px; border-radius:16px; } .brand-copy h1 { font-size:22px; } .panel { padding:18px; } .preview { padding:12px; } .grid2 { gap:8px; } .paper { padding:28px 20px; } }
   @media print {
     @page { size:A4; margin:12mm; }
     body { background:white; }
     .wrap, .panel, .preview { margin:0; padding:0; max-width:none; border:0; box-shadow:none; background:white; }
     .no-print { display:none !important; }
     .layout { display:block; }
-    .paper { width:auto; height:auto; min-height:0; max-width:none; margin:0; padding:8mm; box-shadow:none; break-after:page; font-size:15px; line-height:1.65; }
+    .paper { width:auto; height:auto; min-height:0; max-width:none; margin:0; padding:8mm; border:0; border-radius:0; box-shadow:none; break-after:page; font-size:15px; line-height:1.65; }
     .paper:last-child { break-after:auto; }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="no-print">
-    <h1>ஈட்டிய விடுப்பு கடிதம் – Generator</h1>
-    <p class="intro">விவரங்களை உள்ளிட்டு இரண்டு கடிதங்களையும் உருவாக்கி, ஒரே PDF ஆக சேமிக்கலாம்.</p>
+  <div class="brand-header no-print">
+    <img class="brand-logo" src="assets/aruna-gokul-logo.png" alt="Aruna Gokul Professional Services">
+    <div class="brand-copy">
+      <h1>ஈட்டிய விடுப்பு கடிதம்</h1>
+      <p class="intro">விவரங்களை உள்ளிட்டு விடுப்பு மற்றும் பணியில் சேர்த்தல் கடிதங்களை உருவாக்கி, A4 தாளில் அச்சிடலாம்.</p>
+    </div>
   </div>
   <div class="layout">
     <section class="panel no-print">
@@ -84,6 +98,7 @@
       <p class="smallnote">PDF சேமிக்க Print அழுத்தி, அச்சு அமைப்பில் A4 மற்றும் Portrait தேர்ந்தெடுத்து “Headers and footers” தேர்வை நீக்கவும். “Save as PDF” என்பதைத் தேர்ந்தெடுக்கவும். இரண்டு பக்கங்களும் ஒரே PDF-ல் வரும்.</p>
     </section>
     <section class="preview" id="preview">
+      <h2 class="preview-heading no-print">கடித முன்னோட்டம்</h2>
       <article class="paper" id="leaveLetter"></article>
       <article class="paper" id="joinLetter"></article>
     </section>
