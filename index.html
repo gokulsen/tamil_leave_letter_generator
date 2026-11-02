@@ -156,7 +156,12 @@ function render() {
     : days;
   $("count").textContent = "விடுப்பு நாட்கள்: " + count;
   const reason = $("reason").value === "sick" ? "உடல்நலக் குறைவு காரணமாக" : "சொந்த அலுவல் சார்ந்த காரணத்தினால்";
-  const name = safe($("name").value), designation = safe($("designation").value), subject = safe($("subject").value);
+  const designationValue = $("designation").value;
+  const designation = safe(designationValue);
+  const designationInSentence = safe(designationValue.endsWith("ஆசிரியர்")
+    ? `${designationValue.slice(0, -"ஆசிரியர்".length)}ஆசிரியராக`
+    : designationValue);
+  const name = safe($("name").value), subject = safe($("subject").value);
   const school = safe($("school").value), place = safe($("place").value);
   const startDate = parseDate(start);
   const endDate = parseDate(end);
@@ -170,13 +175,13 @@ function render() {
     <div class="section"><strong>பெறுநர்</strong><br>உயர்திரு தலைமையாசிரியர்,<br>${school},<br>${place}.</div>
     <div>மதிப்பிற்குரிய அம்மையீர்,</div>`;
   $("leaveLetter").innerHTML = `<h3>ஈட்டிய விடுப்பு கடிதம்</h3>${common}
-    <div class="body">வணக்கம், நான் இப்பள்ளியில் ${designation} (${subject}) பணியாற்றி வருகிறேன். ${reason} ${span} ${dayWord} (${dates}) ஈட்டிய விடுப்பு வழங்குமாறு பணிவுடன் கேட்டுக் கொள்கிறேன்.</div>
+    <div class="body">வணக்கம், நான் இப்பள்ளியில் ${designationInSentence} (${subject}) பணியாற்றி வருகிறேன். ${reason} ${span} ${dayWord} (${dates}) ஈட்டிய விடுப்பு வழங்குமாறு பணிவுடன் கேட்டுக் கொள்கிறேன்.</div>
     <div class="thanks">நன்றி</div>
     <div class="signrow"><div>தேதி: ${formatDate($("applied").value)}<br>இடம்: ${place}</div><div>இப்படிக்கு,<br>தங்கள் உண்மையுள்ள,</div></div>
     <div class="signature">${name}</div>
     <div class="attachment">இணைப்பு: ஈட்டிய விடுப்பு விண்ணப்பம்</div>`;
   $("joinLetter").innerHTML = `<h3>பணியில் சேர்த்தல் கடிதம்</h3>${common}
-    <div class="body">வணக்கம், நான் இப்பள்ளியில் ${designation} (${subject}) பணியாற்றி வருகிறேன். ${reason} ${span} ${dayWord} (${dates}) ஈட்டிய விடுப்பு எடுத்துள்ளேன். இன்று (${formatDate($("joining").value)}) மீண்டும் என்னை பணியில் அமர்த்திட செய்யுமாறு பணிவுடன் கேட்டுக் கொள்கிறேன்.</div>
+    <div class="body">வணக்கம், நான் இப்பள்ளியில் ${designationInSentence} (${subject}) பணியாற்றி வருகிறேன். ${reason} ${span} ${dayWord} (${dates}) ஈட்டிய விடுப்பு எடுத்துள்ளேன். இன்று (${formatDate($("joining").value)}) மீண்டும் என்னை பணியில் அமர்த்திட செய்யுமாறு பணிவுடன் கேட்டுக் கொள்கிறேன்.</div>
     <div class="thanks">நன்றி</div>
     <div class="signrow"><div>தேதி: ${formatDate($("joining").value)}<br>இடம்: ${place}</div><div>இப்படிக்கு,<br>தங்கள் உண்மையுள்ள,</div></div>
     <div class="signature">${name}</div>`;
